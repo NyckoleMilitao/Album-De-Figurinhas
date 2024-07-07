@@ -29,11 +29,11 @@ public interface UsuarioService {
 
 	UsuarioResponseDTO toDto(Usuario usuario);
 
-	Perfil verificarPerfilUsuario(Long id);
+	/*Perfil verificarPerfilUsuario(Long id);
 
 	boolean temPermissaoLerPublicacao(Long id);
 
 	boolean temPermissaoCriarPublicacao(Long id);
 
-	boolean temPermissaoGerenciarColecao(Long id);
+	boolean temPermissaoGerenciarColecao(Long id);*/
 }

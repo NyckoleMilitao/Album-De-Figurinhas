@@ -1,5 +1,5 @@
 package ilab.projeto.up.ilab.up.config;
-
+/*
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +16,29 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    
+  
     @Bean
 public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
 }
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-    .antMatchers("/admin/**").hasRole("ADMINISTRADOR")
-    .antMatchers("/autor/**").hasRole("AUTOR")
-    .antMatchers("/colecionador/**").hasRole("COLECIONADOR")
-    .antMatchers("/public/**").permitAll()
-    .anyRequest().authenticated()
-      .and()
-      // some more method calls
-      .formLogin();
+  http.authorizeRequests()
+  .antMatchers("/admin/**").hasRole("ADMINISTRADOR")
+  .antMatchers("/autor/**").hasRole("AUTOR")
+  .antMatchers("/colecionador/**").hasRole("COLECIONADOR")
+  .antMatchers("/h2/**").permitAll()
+  .anyRequest().authenticated()
+  .and()
+  .formLogin()
+      .loginPage("/login")  // Página de login personalizada
+      .permitAll()
+  .and()
+  .logout();
     return http.build();
 }
 
@@ -52,5 +54,5 @@ public void configureGlobal(AuthenticationManagerBuilder auth)
       .and()
       .withUser("admin").password(passwordEncoder().encode("password")).roles("USER", "ADMIN");
 }
-
-}
+ 
+}*/

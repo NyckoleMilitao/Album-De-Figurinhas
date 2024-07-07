@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ilab.projeto.up.ilab.up.dto.FigurinhaResponseDTO;
 import ilab.projeto.up.ilab.up.service.FigurinhaService;
+import ilab.projeto.up.ilab.up.service.TemPermissaoLerPublicacao;
+import io.swagger.annotations.*;
 
 @RestController
 @RequestMapping("/api/colecionador")
@@ -19,7 +21,16 @@ public class ColecionadorController {
     @Autowired
     private FigurinhaService figurinhaService;
 
-    // Endpoint para listar todas as figurinhas de uma página específica do álbum
+    @ApiOperation(value = "Listar todas as figurinhas de um álbum e página específicos")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Figurinhas listadas com sucesso!"),
+            @ApiResponse(code = 401, message = "Erro de autenticação"),
+            @ApiResponse(code = 403, message = "Proibido"),
+            @ApiResponse(code = 404, message = "Recurso não disponível"),
+            @ApiResponse(code = 500, message = "Erro interno no servidor"),
+            @ApiResponse(code = 505, message = "Ocorreu uma exceção")
+    })
+    @TemPermissaoLerPublicacao
     @GetMapping("/album/{numeroAlbum}/pagina/{pagina}")
     public ResponseEntity<List<FigurinhaResponseDTO>> listarFigurinhas(
             @PathVariable int numeroAlbum, 
@@ -28,7 +39,16 @@ public class ColecionadorController {
         return ResponseEntity.ok(response);
     }
 
-    // Endpoint para obter detalhes de uma figurinha específica
+    @ApiOperation(value = "Buscar uma figurinha pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Figurinha encontrada com sucesso!"),
+            @ApiResponse(code = 401, message = "Erro de autenticação"),
+            @ApiResponse(code = 403, message = "Proibido"),
+            @ApiResponse(code = 404, message = "Recurso não disponível"),
+            @ApiResponse(code = 500, message = "Erro interno no servidor"),
+            @ApiResponse(code = 505, message = "Ocorreu uma exceção")
+    })
+    @TemPermissaoLerPublicacao
     @GetMapping("/figurinha/{id}")
     public ResponseEntity<FigurinhaResponseDTO> buscarFigurinha(@PathVariable Long id) {
         FigurinhaResponseDTO response = figurinhaService.buscarFigurinha(id);

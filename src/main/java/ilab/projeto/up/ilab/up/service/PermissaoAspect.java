@@ -1,5 +1,5 @@
 package ilab.projeto.up.ilab.up.service;
-
+/* 
 import java.util.Optional;
 
 import org.aspectj.lang.annotation.Aspect;
@@ -76,4 +76,4 @@ public class PermissaoAspect {
             throw new AccessDeniedException("Acesso negado: você não tem permissão para ler publicações");
         }
     }
-}
+}*/

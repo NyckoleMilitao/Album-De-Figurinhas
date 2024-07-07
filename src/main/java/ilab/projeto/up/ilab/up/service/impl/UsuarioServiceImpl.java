@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -102,7 +102,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
-    @Override
+   /*  @Override
     public Perfil verificarPerfilUsuario(Long id) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
         if (usuarioOpt.isPresent()) {
@@ -110,7 +110,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             return usuario.getPerfil();
         }
         return null; // Ou lançar exceção ou tratar de outra forma se o usuário não for encontrado
-    }
+    }*/
 
     public UsuarioResponseDTO toDto(Usuario usuario) {
         UsuarioResponseDTO dto = new UsuarioResponseDTO();
@@ -122,7 +122,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return dto;
     }
 
-    private UsuarioResponseDTO converterParaUsuarioResponseDTO(Usuario usuario) {
+   /* private UsuarioResponseDTO converterParaUsuarioResponseDTO(Usuario usuario) {
         if (usuario == null) {
             return null;
         }
@@ -130,6 +130,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getSenha(), usuario.getPerfil());
     }
 
+     
     public boolean temPermissaoLerPublicacao(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
 
@@ -164,5 +165,5 @@ public class UsuarioServiceImpl implements UsuarioService {
         UsuarioResponseDTO usuarioDTO = converterParaUsuarioResponseDTO(usuario.get());
 
         return usuarioDTO.getPerfil() == Perfil.ADMINISTRADOR;
-    }
+    }*/
 }
