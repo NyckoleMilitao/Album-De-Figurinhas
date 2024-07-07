@@ -78,7 +78,7 @@ Adicione as seguintes dependências ao seu `pom.xml`:
     </dependency>
 </dependencies>
 
-#Configuração do Banco de Dados
+## Configuração do Banco de Dados
 No arquivo application.properties, configure o banco de dados:
 
 spring.datasource.url=jdbc:sqlite:C:/caminho/para/seu/BancoTeste.db
@@ -87,7 +87,7 @@ spring.jpa.database-platform=org.hibernate.dialect.SQLiteDialect
 spring.jpa.show-sql=true
 spring.h2.console.enabled=true
 
-#Controlador de Login
+## Controlador de Login
 
 @RestController
 public class LoginController {
@@ -123,8 +123,8 @@ public class LoginController {
 }
 
 
-#4. Configuração do Frontend
-##Estrutura HTML Básica
+# 4. Configuração do Frontend
+## Estrutura HTML Básica
 Crie um arquivo index.html com o seguinte conteúdo:
 
 <!DOCTYPE html>
@@ -153,7 +153,7 @@ Crie um arquivo index.html com o seguinte conteúdo:
 </body>
 </html>
 
-#Estilos CSS Básicos
+## Estilos CSS Básicos
 Crie um arquivo styles.css com o seguinte conteúdo:
 
 body {
@@ -208,7 +208,7 @@ button:hover {
 }
 
 
-#Scripts JavaScript
+## Scripts JavaScript
 Crie um arquivo scripts.js com o seguinte conteúdo:
 
 $(document).ready(function() {
@@ -255,8 +255,8 @@ $(document).ready(function() {
 });
 
 
-#Observações Finais
-* Ajuste os URLs de redirecionamento (/admin/dashboard, /autor/dashboard, /colecionador/dashboard) conforme necessário para corresponder às rotas definidas no seu backend.
+# Observações Finais
+** Ajuste os URLs de redirecionamento (/admin/dashboard, /autor/dashboard, /colecionador/dashboard) conforme necessário para corresponder às rotas definidas no seu backend.
 * Este exemplo é simplificado e não inclui medidas de segurança avançadas. Considere implementar medidas de segurança adequadas para um ambiente de produção.
 * Teste o aplicativo integrando o frontend e o backend para garantir que o fluxo de login e redirecionamento funcione conforme esperado.
 
