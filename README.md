@@ -256,7 +256,7 @@ $(document).ready(function() {
 
 
 # Observações Finais
-** Ajuste os URLs de redirecionamento (/admin/dashboard, /autor/dashboard, /colecionador/dashboard) conforme necessário para corresponder às rotas definidas no seu backend.
+* Ajuste os URLs de redirecionamento (/admin/dashboard, /autor/dashboard, /colecionador/dashboard) conforme necessário para corresponder às rotas definidas no seu backend.
 * Este exemplo é simplificado e não inclui medidas de segurança avançadas. Considere implementar medidas de segurança adequadas para um ambiente de produção.
 * Teste o aplicativo integrando o frontend e o backend para garantir que o fluxo de login e redirecionamento funcione conforme esperado.
 
