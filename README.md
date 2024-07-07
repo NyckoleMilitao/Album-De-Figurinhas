@@ -77,7 +77,7 @@ Adicione as seguintes dependências ao seu `pom.xml`:
         <scope>test</scope>
     </dependency>
 </dependencies>
-
+```
 ## Configuração do Banco de Dados
 No arquivo application.properties, configure o banco de dados:
 
@@ -262,4 +262,4 @@ $(document).ready(function() {
 
 
 
-###Este README.md fornece uma visão geral clara do projeto, instruções de configuração para o backend e frontend
+### Este README.md fornece uma visão geral clara do projeto, instruções de configuração para o backend e frontend
