@@ -7,25 +7,26 @@ import {
   BsCheckCircle,
 } from "react-icons/bs";
 
+const roles = ["Administrador", "Autor", "Colecionador"];
+
 function FrmUsuarios() {
   const [users, setUsers] = useState([
-    { id: 1, name: "NyckoleMilitao", role: "administrador" },
-    { id: 2, name: "BeatrizBarcelos", role: "autor" },
+    { id: 1, name: "NyckoleMilitao", role: "Administrador" },
+    { id: 2, name: "BeatrizBarcelos", role: "Administador" },
   ]);
   const [newUser, setNewUser] = useState({ name: "", role: "" });
   const [filterText, setFilterText] = useState("");
   const [editingUser, setEditingUser] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("");
-
-  const roles = ["administrador", "autor", "colecionador"];
+  const [selectedRole, setSelectedRole] = useState(""); // Estado para a role selecionada
+  const [editingPassword, setEditingPassword] = useState(""); // Estado para a senha editada
 
   const handleAddUser = () => {
     if (newUser.name && newUser.role) {
       const newUserList = [...users, { id: Date.now(), ...newUser }];
       setUsers(newUserList);
       setNewUser({ name: "", role: "" });
-      setShowAddForm(false); // Fechar o formulário após adicionar
+      setShowAddForm(false);
     } else {
       alert("Por favor, preencha todos os campos.");
     }
@@ -39,26 +40,23 @@ function FrmUsuarios() {
   const handleEditUser = (id) => {
     const userToEdit = users.find((user) => user.id === id);
     if (userToEdit) {
-      setEditingUser({ ...userToEdit }); // Cópia do usuário para edição
-      setSelectedRole(userToEdit.role); // Define o papel selecionado para edição
+      setEditingUser({ ...userToEdit });
+      setEditingPassword(""); // Limpar o estado da senha ao editar
     }
   };
 
   const handleUpdateUser = () => {
     const updatedUsers = users.map((user) =>
-      user.id === editingUser.id ? { ...editingUser, role: selectedRole } : user
+      user.id === editingUser.id ? editingUser : user
     );
     setUsers(updatedUsers);
     setEditingUser(null);
+    setEditingPassword(""); // Limpar a senha após a edição
   };
 
   const handleFilterUsers = (event) => {
     setFilterText(event.target.value);
   };
-
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(filterText.toLowerCase())
-  );
 
   return (
     <div
@@ -75,7 +73,6 @@ function FrmUsuarios() {
         boxSizing: "border-box",
       }}
     >
-      <h1 style={{ textAlign: "center", marginBottom: "30px" }}>Usuários</h1>
       <h2
         style={{
           textAlign: "center",
@@ -111,11 +108,9 @@ function FrmUsuarios() {
             }}
             required
           />
-          <input
-            type="text"
-            placeholder="Cargo"
-            value={newUser.role}
-            onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+          <select
+            value={selectedRole}
+            onChange={(e) => setSelectedRole(e.target.value)}
             style={{
               marginBottom: "10px",
               width: "100%",
@@ -123,25 +118,38 @@ function FrmUsuarios() {
               fontSize: "16px",
               boxSizing: "border-box",
             }}
-            required
-          />
-          <BsCheckCircle
+          >
+            <option value="">Selecione o Cargo</option>
+            {roles.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
+          </select>
+          <div
             style={{
-              cursor: "pointer",
-              fontSize: "1.5rem",
-              color: "#28a745",
-              marginRight: "10px",
+              display: "flex",
+              justifyContent: "center",
             }}
-            onClick={handleAddUser}
-          />
-          <BsX
-            style={{
-              cursor: "pointer",
-              fontSize: "1.5rem",
-              color: "#dc3545",
-            }}
-            onClick={() => setShowAddForm(false)}
-          />
+          >
+            <BsCheckCircle
+              style={{
+                cursor: "pointer",
+                fontSize: "1.5rem",
+                color: "#28a745",
+                marginRight: "10px",
+              }}
+              onClick={handleAddUser}
+            />
+            <BsX
+              style={{
+                cursor: "pointer",
+                fontSize: "1.5rem",
+                color: "#dc3545",
+              }}
+              onClick={() => setShowAddForm(false)}
+            />
+          </div>
         </div>
       )}
       <div style={{ marginBottom: "20px" }}>
@@ -167,47 +175,51 @@ function FrmUsuarios() {
         />
       </div>
       <ul style={{ listStyleType: "none", padding: 0 }}>
-        {filteredUsers.map((user) => (
-          <li
-            key={user.id}
-            style={{
-              marginBottom: "10px",
-              borderBottom: "1px solid #ccc",
-              paddingBottom: "5px",
-            }}
-          >
-            <div
+        {users
+          .filter((user) =>
+            user.name.toLowerCase().includes(filterText.toLowerCase())
+          )
+          .map((user) => (
+            <li
+              key={user.id}
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+                marginBottom: "10px",
+                borderBottom: "1px solid #ccc",
+                paddingBottom: "5px",
               }}
             >
-              <div>
-                <strong>{user.name}</strong> - ({user.role})
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <strong>{user.name}</strong> - ({user.role})
+                </div>
+                <div>
+                  <BsPencilSquare
+                    onClick={() => handleEditUser(user.id)}
+                    style={{
+                      cursor: "pointer",
+                      marginRight: "10px",
+                      fontSize: "1.2rem",
+                      color: "#007bff",
+                    }}
+                  />
+                  <BsTrash
+                    onClick={() => handleDeleteUser(user.id)}
+                    style={{
+                      cursor: "pointer",
+                      fontSize: "1.2rem",
+                      color: "#dc3545",
+                    }}
+                  />
+                </div>
               </div>
-              <div>
-                <BsPencilSquare
-                  onClick={() => handleEditUser(user.id)}
-                  style={{
-                    cursor: "pointer",
-                    marginRight: "10px",
-                    fontSize: "1.2rem",
-                    color: "#007bff",
-                  }}
-                />
-                <BsTrash
-                  onClick={() => handleDeleteUser(user.id)}
-                  style={{
-                    cursor: "pointer",
-                    fontSize: "1.2rem",
-                    color: "#dc3545",
-                  }}
-                />
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))}
       </ul>
       {editingUser && (
         <div style={{ marginTop: "20px" }}>
@@ -216,7 +228,10 @@ function FrmUsuarios() {
             type="text"
             value={editingUser.name}
             onChange={(e) =>
-              setEditingUser({ ...editingUser, name: e.target.value })
+              setEditingUser({
+                ...editingUser,
+                name: e.target.value,
+              })
             }
             style={{
               marginBottom: "10px",
@@ -228,8 +243,10 @@ function FrmUsuarios() {
             required
           />
           <select
-            value={selectedRole}
-            onChange={(e) => setSelectedRole(e.target.value)}
+            value={editingUser.role}
+            onChange={(e) =>
+              setEditingUser({ ...editingUser, role: e.target.value })
+            }
             style={{
               marginBottom: "10px",
               width: "100%",
@@ -238,29 +255,50 @@ function FrmUsuarios() {
               boxSizing: "border-box",
             }}
           >
+            <option value="">Selecione o Cargo</option>
             {roles.map((role) => (
               <option key={role} value={role}>
                 {role}
               </option>
             ))}
           </select>
-          <BsCheckCircle
+          <input
+            type="password"
+            value={editingPassword}
+            onChange={(e) => setEditingPassword(e.target.value)}
+            placeholder="Nova Senha"
             style={{
-              cursor: "pointer",
-              fontSize: "1.5rem",
-              color: "#28a745",
-              marginRight: "10px",
+              marginBottom: "10px",
+              width: "100%",
+              padding: "8px",
+              fontSize: "16px",
+              boxSizing: "border-box",
             }}
-            onClick={handleUpdateUser}
           />
-          <BsX
+          <div
             style={{
-              cursor: "pointer",
-              fontSize: "1.5rem",
-              color: "#dc3545",
+              display: "flex",
+              justifyContent: "center",
             }}
-            onClick={() => setEditingUser(null)}
-          />
+          >
+            <BsCheckCircle
+              style={{
+                cursor: "pointer",
+                fontSize: "1.5rem",
+                color: "#28a745",
+                marginRight: "10px",
+              }}
+              onClick={handleUpdateUser}
+            />
+            <BsX
+              style={{
+                cursor: "pointer",
+                fontSize: "1.5rem",
+                color: "#dc3545",
+              }}
+              onClick={() => setEditingUser(null)}
+            />
+          </div>
         </div>
       )}
     </div>
