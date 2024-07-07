@@ -58,6 +58,13 @@ function FrmUsuarios() {
     setFilterText(event.target.value);
   };
 
+  const handleLogout = () => {
+    // Lógica para redirecionar para a tela de login
+    // Por exemplo:
+    // history.push('/login'); // Se estiver usando react-router-dom
+    alert("Implemente aqui a lógica para redirecionar para a tela de login.");
+  };
+
   return (
     <div
       style={{
@@ -119,7 +126,7 @@ function FrmUsuarios() {
               boxSizing: "border-box",
             }}
           >
-            <option value="">Selecione o Cargo</option>
+            <option value="">Selecione o Perfil</option>
             {roles.map((role) => (
               <option key={role} value={role}>
                 {role}
@@ -255,7 +262,7 @@ function FrmUsuarios() {
               boxSizing: "border-box",
             }}
           >
-            <option value="">Selecione o Cargo</option>
+            <option value="">Selecione o Perfil</option>
             {roles.map((role) => (
               <option key={role} value={role}>
                 {role}
@@ -301,6 +308,22 @@ function FrmUsuarios() {
           </div>
         </div>
       )}
+      <button
+        onClick={handleLogout}
+        style={{
+          position: "absolute",
+          bottom: "10px",
+          right: "10px",
+          fontSize: "0.8rem",
+          padding: "5px 10px",
+          color: "black",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        Sair
+      </button>
     </div>
   );
 }

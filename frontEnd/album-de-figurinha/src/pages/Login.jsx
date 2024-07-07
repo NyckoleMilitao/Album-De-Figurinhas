@@ -8,9 +8,11 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Adicione a lógica de autenticação aqui
-    if (username === "admin" && password === "admin") {
-      navigate("/usuarios"); // Redireciona para a rota /usuarios
+    // Simulação simples de autenticação
+    if (username === "autor" && password === "123456") {
+      navigate("/autoria"); // Redireciona para a rota /frm-autoria para o perfil Autor
+    } else if (username === "admin" && password === "admin") {
+      navigate("/usuarios"); // Redireciona para a rota /usuarios para o perfil Administrador
     } else {
       alert("Credenciais inválidas");
     }
