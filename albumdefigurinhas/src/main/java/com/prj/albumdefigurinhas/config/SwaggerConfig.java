@@ -18,7 +18,7 @@ public class SwaggerConfig {
 
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
-            .apis(RequestHandlerSelectors.basePackage("ilab.projeto.up.ilab.up.controller"))
+            .apis(RequestHandlerSelectors.basePackage("com.prj.albumdefigurinhas.controller"))
             .paths( PathSelectors.any())
             .build()
             .useDefaultResponseMessages(true)
@@ -31,17 +31,29 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("iLab UP")
-                .description("Essa foi a API desenvolvida para projeto aplicado da Residência em TIC/Software do Serratec, \n"
-                		+ "para desenvolvimento do Sistema iLab Up.\n\n"
-
-                		+ "Desenvolvedores: Gilnei Lima, Nyckole Militão.\n\n"
-                        + "Aconselhamos o seguinte passo a passo ao utilizar a API:\n"
-                        + "1) Cadastrar primeiro uma COLABORADOR; \n"
-                        + "2) Cadastrar um PAPEL(FUNÇÃO); \n"
-                        + "3) Cadastrar um CLIENTE; \n"
-                        + "4) Cadastrar um CONTRATO; \n"
-                        + "5) Cadastrar uma NOTA FISCAL; \n"
-                        + "6) Alimentar através de arquivo de planilha EXCEL a informações do relacionamento entre colaboradores e contratos.")
+                .description("1. Resumo" + //
+                                        "Neste sistema é possível realizar operações específicas de acordo com o perfil do usuário: Administrador, Autor e Colecionador." + //
+                                        
+                                        "Perfis e Funcionalidades:\r\n" + //
+                                        "Administrador: Responsável unicamente pelo gerenciamento dos usuários.\r\n" + //
+                                        "\r\n" + //
+                                        "Após login, verá uma tela com a listagem dos usuários.\r\n" + //
+                                        "Possível realizar inclusão, exclusão, edição e filtro dos usuários.\r\n" + //
+                                        "Para incluir e editar, será mostrado uma tela para cadastrar nome, senha e perfil (todos campos obrigatórios).\r\n" + //
+                                        "Pode zerar a senha do usuário, gerando uma senha padrão (ex: 123456 ou o próprio nome).\r\n" + //
+                                        "Autor: Responsável por criar/gerenciar o único álbum da aplicação.\r\n" + //
+                                        "\r\n" + //
+                                        "Após login, verá a tela do álbum, onde todas as figurinhas cadastradas serão apresentadas.\r\n" + //
+                                        "Possível inserir, excluir, editar e filtrar figurinhas.\r\n" + //
+                                        "Ao inserir ou editar, será levado à tela de figurinha para preencher ou alterar dados (nome, número, descrição, página, tag, foto).\r\n" + //
+                                        "Colecionador: Usuário do álbum, pode visualizar páginas do álbum e figurinhas de cada página.\r\n" + //
+                                        "\r\n" + //
+                                        "Para ter mais detalhes de uma figurinha, basta dar um duplo clique na figurinha desejada para que sejam mostradas todas as informações e a imagem.\r\n" + //
+                                        "A tela de login é comum a todos os usuários e solicita nome e senha.\r\n" + //
+                                        "\r\n" + //
+                                        "2. Tecnologias Utilizadas\r\n" + //
+                                        "Maven: Gerenciamento de dependências e build do projeto.\r\n" + //
+                                        "Spring Boot: Framework para criação de aplicações Java com configuração mínima.")
 
                         .version("1.0.0")
                         .license("Apache License Version 2.0")
@@ -50,7 +62,6 @@ public class SwaggerConfig {
                 
                 .build();
         return apiInfo;
-    
-    }
 
+    }
 }
